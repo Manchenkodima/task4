@@ -10,7 +10,7 @@ const validateTodoBody = [
         .notEmpty().withMessage('title не может быть пустым')
         .isString().withMessage('title только строковый формат')
         .isLength({ min: 3 }).withMessage("title должен содержать не менее 3 символов"),
-    body('id').isString().withMessage('ID не совпадает'),
+    // body('id').isString().withMessage('ID не совпадает'),
     body('isCompleted').isBoolean().withMessage('isCompleted только булевое значение'),
     body('idUser').isString().withMessage('idUser только строковый формат')
 ]
@@ -157,7 +157,7 @@ router.patch('/:id', authenticateToken, validateTodoId, TodoControllers.editTodo
  *              
  */
 
-router.patch('/:id/isComplited', authenticateToken, TodoControllers.editTodoIsCompleted)
+router.patch('/:id/isCompleted', authenticateToken, validateTodoId, TodoControllers.editTodoIsCompleted)
 
 /**
  * @swagger
@@ -182,7 +182,7 @@ router.patch('/:id/isComplited', authenticateToken, TodoControllers.editTodoIsCo
  *          description: Внутренняя ошибка сервера. Пожалуйста, попробуйте повторить запрос позже.
  */
 
-router.delete('/delete/:id', authenticateToken, TodoControllers.deleteTodo)
+router.delete('/delete/:id', authenticateToken, validateTodoId, TodoControllers.deleteTodo)
 
 
 

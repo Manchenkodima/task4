@@ -74,7 +74,7 @@ class TodoService {
                         rej('Не существует')
                     } else {
                         const updateTodo = {...obj[index]}
-                        updateTodo.isComplited = !updateTodo.isComplited
+                        updateTodo.isCompleted = !updateTodo.isCompleted
                         obj[index] = updateTodo
                         fs.writeFile('data.json', JSON.stringify(obj, null, 3), 'utf8', err => {
                             if (err) {
