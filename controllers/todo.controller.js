@@ -44,7 +44,6 @@ class todoControllers {
             if (!errors.isEmpty()) {
                 return res.status(400).send({ errors: errors.array() })
             }
-           
             const id = req.params.id;
             console.log(id)
             const title = req.body.title

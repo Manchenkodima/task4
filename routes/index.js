@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const todoRourtes = require('./todo.routes')
-const usersRoutes = require('./users.rotes')
+const usersRoutes = require('./users.routes')
 
 
 router.use('/todo', todoRourtes)

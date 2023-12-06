@@ -9,6 +9,7 @@
     "express-validator": "^7.0.1",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "save-dev": "^0.0.1-security",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "uuid": "^9.0.1"
@@ -18,10 +19,15 @@
   "description": "my first project",
   "main": "index.js",
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "chai": "^4.3.10",
+    "jest": "^29.7.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

@@ -61,10 +61,8 @@ class UsersController{
             if (!validatePassword) {
                 res.status(403).send({ message: 'Логин или пароль не совпадает' });
             }
-            const token = jwt.sign({ uderId: user.id }, process.env.SECRET_KEY)
-            res.status(200).send({
-                token: token
-            });
+            const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY)
+            res.status(200).send({ token: token });
         }
         catch (error) {
             Sentry.captureException(error)

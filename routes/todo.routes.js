@@ -10,9 +10,7 @@ const validateTodoBody = [
         .notEmpty().withMessage('title не может быть пустым')
         .isString().withMessage('title только строковый формат')
         .isLength({ min: 3 }).withMessage("title должен содержать не менее 3 символов"),
-    // body('id').isString().withMessage('ID не совпадает'),
-    body('isCompleted').isBoolean().withMessage('isCompleted только булевое значение'),
-    body('idUser').isString().withMessage('idUser только строковый формат')
+    body('isCompleted').isBoolean().withMessage('isCompleted только булевое значение')
 ]
 
 const validateTodoId = param("id").isString().withMessage("Такого ID не существует");
