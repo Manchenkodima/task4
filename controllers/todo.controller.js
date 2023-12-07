@@ -31,6 +31,7 @@ class todoControllers {
                 isCompleted: false,
                 userId: userId
             }
+            console.log(userId)
             await TodoService.createTodo({ id: uuid(), ...req.body })
             return res.send(newTodo).status(200)
         } catch (error) {

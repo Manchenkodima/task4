@@ -39,7 +39,7 @@ class UsersController{
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
             const newUser = await UserServices.createUser({id: uuid(), ...req.body, password: hashedPassword})
-            return res.send(newUser).status(201)
+            res.status(201).send(newUser)
         } catch(error){
             Sentry.captureException(error)
         }

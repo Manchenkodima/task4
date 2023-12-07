@@ -18,12 +18,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-
 const routes = require("./routes/index")
 app.use("/api", routes)
  
-const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server started http://localhost:${PORT}`);
-});
+module.exports = app;
