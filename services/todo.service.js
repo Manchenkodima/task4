@@ -24,7 +24,7 @@ class TodoService {
                 } else {
                     const obj = JSON.parse(data)
                     obj.push(newTodo)
-                    fs.writeFile('data.json', JSON.stringify(obj, null, 3), (err, data) => {
+                    fs.writeFile('data.json', JSON.stringify(obj, null, 3), (err) => {
                         if (err) {
                             rej(err)
                         } else {

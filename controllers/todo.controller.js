@@ -24,14 +24,14 @@ class todoControllers {
             if (!errors.isEmpty()) {
                 return res.status(400).send({ errors: errors.array() })
             }
-            const { idUser, title, } = req.body;
+            const { userId, title } = req.body;
             const newTodo = {
                 id: uuid(),
                 title: title,
                 isCompleted: false,
-                idUser: idUser
+                userId: userId
             }
-            await TodoService.createTodo({id: uuid(), ...req.body})
+            await TodoService.createTodo({ id: uuid(), ...req.body })
             return res.send(newTodo).status(200)
         } catch (error) {
             Sentry.captureException(error)
@@ -47,9 +47,7 @@ class todoControllers {
             const id = req.params.id;
             console.log(id)
             const title = req.body.title
-            
             const newTodo = await TodoService.editTodoTitle(id, title)
-            
             return res.send(newTodo).status(200)
         } catch (error) {
             Sentry.captureException(error)
@@ -64,7 +62,6 @@ class todoControllers {
                 return res.status(400).send({ errors: errors.array() })
             }
             const id = req.params.id
-            
             const newTodo = await TodoService.editTodoIsCompleted(id)
             return res.send(newTodo).status(200)
         } catch (error) {
