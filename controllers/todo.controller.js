@@ -24,14 +24,13 @@ class todoControllers {
             if (!errors.isEmpty()) {
                 return res.status(400).send({ errors: errors.array() })
             }
-            const { userId, title } = req.body;
+            const { title } = req.body;
             const newTodo = {
                 id: uuid(),
                 title: title,
                 isCompleted: false,
-                userId: userId
+                userId: req.userId
             }
-            console.log(userId)
             await TodoService.createTodo({ id: uuid(), ...req.body })
             return res.send(newTodo).status(200)
         } catch (error) {

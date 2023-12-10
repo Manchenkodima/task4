@@ -8,7 +8,7 @@ const authenticateToken = (req, res, next) => {
         if (token == null) res.status(401).send({ message: 'Не авторизован' });
         jwt.verify(token, process.env.SECRET_KEY, (err, data) => {
             if (err) next(new Error("Не верный токен"));
-            req.body.userId = data.userId;
+            req.userId = data.userId;
             next();
         });
     } catch (err) {
