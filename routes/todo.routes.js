@@ -43,7 +43,7 @@ const validateTodoId = param("id").isString().withMessage("Такого ID не 
  *           example: false
  */
 
-router.get('/', authenticateToken, TodoControllers.getTodo)
+router.get('/', authenticateToken,  TodoControllers.getTodo)
 
 /**
  * @swagger

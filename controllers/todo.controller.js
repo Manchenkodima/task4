@@ -9,10 +9,10 @@ class todoControllers {
         try{
             const errors = validationResult(req)
             if(!errors.isEmpty()){
-                return res.status(400).send({errors: errors.array()})
+            res.status(400).send({errors: errors.array()})
             }
             const todo = await TodoService.getTodo()
-            return res.send(todo)
+            res.status(200).send(todo)
         } catch(error){
             Sentry.captureException(error)
         }
@@ -32,7 +32,7 @@ class todoControllers {
                 userId: req.userId
             }
             await TodoService.createTodo({ id: uuid(), ...req.body })
-            return res.send(newTodo).status(200)
+             res.status(200).send(newTodo)
         } catch (error) {
             Sentry.captureException(error)
         }
@@ -48,7 +48,7 @@ class todoControllers {
             console.log(id)
             const title = req.body.title
             const newTodo = await TodoService.editTodoTitle(id, title)
-            return res.send(newTodo).status(200)
+            return res.status(200).send(newTodo)
         } catch (error) {
             Sentry.captureException(error)
         }
@@ -63,7 +63,7 @@ class todoControllers {
             }
             const id = req.params.id
             const newTodo = await TodoService.editTodoIsCompleted(id)
-            return res.send(newTodo).status(200)
+            return res.status(200).send(newTodo)
         } catch (error) {
             Sentry.captureException(error)
         }

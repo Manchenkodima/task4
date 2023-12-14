@@ -14,7 +14,7 @@ class UsersController{
                 return res.status(400).send({errors: errors.array()})
             }
             const user = await UserServices.getUser()
-            return res.send(user)
+            return res.status(200).send(user)
         } catch(error){
             Sentry.captureException(error)
         }
