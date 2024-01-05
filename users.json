@@ -8,5 +8,20 @@
       "id": "11071a1c-35dd-49b9-8e32-0a9ea77be95f",
       "email": "user@gmail.com",
       "password": "$2b$10$cJOeu2ZnsNqivl/UsEZb3.3FJ/dqWIPLG7z9sIisc95gtUtd8ZeoW"
+   },
+   {
+      "id": "8b42f87f-f7b2-4dde-ad8a-1536e5604dc3",
+      "email": "DIMA@gmail.com",
+      "password": "$2b$10$bppKIPbeMWpfkoKIgxnK8eFEeZkNWQqrAIwRy.gQ.kIXU.Gq9EF1K"
+   },
+   {
+      "id": "b90cb871-34d0-4e59-bfe8-5f59ca0e29ba",
+      "email": "TEST-USER@gmail.com",
+      "password": "$2b$10$SwH.Hmqj9TS4Xb2jUxK7Guz/5JcxqAdUjjuvL8jKeok7YGtDR5LIy"
+   },
+   {
+      "id": "691a4527-7f78-473d-9bc4-65f0dcb2c70b",
+      "email": "TEST-USER_USER@gmail.com",
+      "password": "$2b$10$JQEVJJ8dTnby0.tFZNJ6q.cqkIk1lAD4ONYraDrZeZGmhhwn/C.eK"
    }
 ]

@@ -14,17 +14,19 @@ class UsersController{
                 return res.status(400).send({errors: errors.array()})
             }
             const user = await UserServices.getUser()
-            return res.status(200).send(user)
+         res.status(200).send(user)
         } catch(error){
             Sentry.captureException(error)
         }
     }
 
-    async findEmail(email) {
+    async findEmail(req, res) {
         try {
-            const users = await UserServices.getUser();
-            const isUsed = users.some(item => item.email === email);
-            return isUsed;
+            const email = req.params.email
+            const user = await UserServices.getUserByEmail(email);
+            res.status(200).send(user)
+            // const isUsed = users.filter(item => item.email === email);
+            // return isUsed;
         } catch (error) {
             Sentry.captureException(error);
         }
@@ -66,6 +68,17 @@ class UsersController{
         }
         catch (error) {
             Sentry.captureException(error)
+        }
+    }
+    async deleteUser(req, res) {
+        try {
+            const id = req.params.id
+            const user = await UserServices.deleteUserById(id);
+            res.status(200).send(user)
+            // const isUsed = users.filter(item => item.email === email);
+            // return isUsed;
+        } catch (error) {
+            Sentry.captureException(error);
         }
     }
 }

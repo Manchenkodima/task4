@@ -36,6 +36,21 @@ const validationNoEmail = [
 
 /**
  * @swagger
+ * /api/users/email/{email}:
+ *   get:
+ *     summary: Получить user по email
+ *     description: Получение списка users из базы данных.
+ *     tags:
+ *       - Users
+ *     responses:
+ *      200:
+ *         description: Успешный запрос. Возвращает массив users
+ *      500:
+ *         description: Ошибка сервера. Не удалось получить список всех users
+ */
+router.get('/email/:email', UserControllers.findEmail)
+/**
+ * @swagger
  * /api/users:
  *   get:
  *     summary: Получить список всех users
@@ -48,6 +63,7 @@ const validationNoEmail = [
  *      500:
  *         description: Ошибка сервера. Не удалось получить список всех users
  */
+
 
 router.get('/', UserControllers.getUser)
 
@@ -127,6 +143,31 @@ router.post('/create', validateEmail, validateBody, UserControllers.createUser)
  */
 
 router.post('/login', validationNoEmail, validateBody, UserControllers.login)
+
+
+/**
+ * @swagger
+ * /api/users/delete/{id}:
+ *    delete:
+ *      summary: Удалить user
+ *      description: Удаление user из общей базы
+ *      tags:
+ *        - Users
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *      responses:
+ *        200:
+ *          description: Успешное удаление user
+ *        404:
+ *          description: User с указанным идентификатором не найдена.
+ *        500:
+ *          description: Внутренняя ошибка сервера. Пожалуйста, попробуйте повторить запрос позже.
+ */
+router.delete('/delete/:id', UserControllers.deleteUser)
 
 
 
