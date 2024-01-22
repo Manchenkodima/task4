@@ -11,7 +11,7 @@ class todoControllers {
             if(!errors.isEmpty()){
             res.status(400).send({errors: errors.array()})
             }
-            const todo = await TodoService.getTodo()
+            const todo = await TodoService.getTodo(req.userId)
             res.status(200).send(todo)
         } catch(error){
             Sentry.captureException(error)
@@ -31,8 +31,9 @@ class todoControllers {
                 isCompleted: false,
                 userId: req.userId
             }
-            await TodoService.createTodo({ id: uuid(), ...req.body })
-             res.status(200).send(newTodo)
+            // id: uuid(), ...req.body 
+            await TodoService.createTodo(newTodo)
+            res.status(200).send(newTodo)
         } catch (error) {
             Sentry.captureException(error)
         }
@@ -44,10 +45,13 @@ class todoControllers {
             if (!errors.isEmpty()) {
                 return res.status(400).send({ errors: errors.array() })
             }
+            const userId = req.userId
             const id = req.params.id;
             console.log(id)
             const title = req.body.title
-            const newTodo = await TodoService.editTodoTitle(id, title)
+            console.log(title)
+            console.log(userId)
+            const newTodo = await TodoService.editTodoTitleById(id, title, userId)
             return res.status(200).send(newTodo)
         } catch (error) {
             Sentry.captureException(error)
@@ -61,8 +65,15 @@ class todoControllers {
             if (!errors.isEmpty()) {
                 return res.status(400).send({ errors: errors.array() })
             }
+            const userId = req.userId
             const id = req.params.id
-            const newTodo = await TodoService.editTodoIsCompleted(id)
+            const todo = await TodoService.getOneTodo(id, userId)
+            if(!todo){
+                return res.status(400).send('Таска не найдена')
+            }
+            const newStatus = !todo.isCompleted
+
+            const newTodo = await TodoService.editTodoIsCompleted(id, userId, newStatus)
             return res.status(200).send(newTodo)
         } catch (error) {
             Sentry.captureException(error)
@@ -76,8 +87,8 @@ class todoControllers {
                 return res.status(400).send({ errors: errors.array() })
             }
             const id = req.params.id
-            const deleteTodoId = await TodoService.deleteTodo(id)
-            return res.send(deleteTodoId)
+            const deleteTodoId = await TodoService.deleteTodoById(id, req.userId)
+            return res.status(200).send(deleteTodoId)
         } catch (error) {
             Sentry.captureException(error)
         }

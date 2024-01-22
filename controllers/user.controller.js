@@ -6,27 +6,34 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 
-class UsersController{
-    async getUser(req, res){
-        try{
+class UsersController {
+    async getUser(req, res) {
+        try {
             const errors = validationResult(req)
-            if(!errors.isEmpty()){
-                return res.status(400).send({errors: errors.array()})
+            if (!errors.isEmpty()) {
+                return res.status(400).send({ errors: errors.array() })
             }
             const user = await UserServices.getUser()
-         res.status(200).send(user)
-        } catch(error){
+            res.status(200).send(user)
+        } catch (error) {
             Sentry.captureException(error)
         }
     }
+    async findEmail(email) {
+        try {
+            const user = await UserServices.getUser();
+            const isUsed = user.some(item => item.email === email);
+            return isUsed;
+        } catch (error) {
+            Sentry.captureException(error);
+        }
+    }
 
-    async findEmail(req, res) {
+    async getUserByEmail(req, res) {
         try {
             const email = req.params.email
             const user = await UserServices.getUserByEmail(email);
             res.status(200).send(user)
-            // const isUsed = users.filter(item => item.email === email);
-            // return isUsed;
         } catch (error) {
             Sentry.captureException(error);
         }
@@ -40,7 +47,7 @@ class UsersController{
             }
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
-            const newUser = await UserServices.createUser({id: uuid(), ...req.body, password: hashedPassword})
+            const newUser = await UserServices.createUser({ ...req.body, password: hashedPassword})
             res.status(201).send(newUser)
         } catch(error){
             Sentry.captureException(error)
@@ -75,8 +82,6 @@ class UsersController{
             const id = req.params.id
             const user = await UserServices.deleteUserById(id);
             res.status(200).send(user)
-            // const isUsed = users.filter(item => item.email === email);
-            // return isUsed;
         } catch (error) {
             Sentry.captureException(error);
         }

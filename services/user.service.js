@@ -68,7 +68,7 @@ async createUser(user) {
 }
 
 async deleteUserById(id){
-    const user = await User.deleteOne({id})
+    const user = await User.findByIdAndDelete(id)
     return user
 }
 

@@ -48,7 +48,7 @@ const validationNoEmail = [
  *      500:
  *         description: Ошибка сервера. Не удалось получить список всех users
  */
-router.get('/email/:email', UserControllers.findEmail)
+router.get('/email/:email', UserControllers.getUserByEmail)
 /**
  * @swagger
  * /api/users:
